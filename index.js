@@ -28,8 +28,7 @@ client.on('presenceUpdate', (oldPresence, newPresence) => {
       description: `<@!${newPresence.user.id}>がダウンしています。`,
       color: 0xff0000
     }});
-  }
-  if (newPresence.status !== "offline") {
+  } else if (newPresence.status !== "offline") {
     LogChannel.send({embed: {
       title: "アップ情報",
       description: `<@!${newPresence.user.id}>がオンラインに復帰しました。`,
