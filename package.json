@@ -1,0 +1,11 @@
+{
+  "name": "AuroraDownDetector",
+  "version": "1.0.0",
+  "description": "A AuroraBOts Down Detector",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "discord.js": "^12.5.3",
+    "express": "^4.17.1"
+  }
+}
