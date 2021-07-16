@@ -1,6 +1,6 @@
 const discord = require("discord.js");
 const client = new discord.Client();
-
+const currentStatus = {}
 const prefix = "add!";
 
 const express = require("express");
@@ -21,14 +21,29 @@ client.on('presenceUpdate', (oldPresence, newPresence) => {
   if (oldPresence && oldPresence.userID !== "820549182984814645" && oldPresence.userID !== "841539874577317888") return;
   if (newPresence && newPresence.userID !== "820549182984814645" && newPresence.userID !== "841539874577317888") return;
   if (oldPresence.status == newPresence.status) return;
+  if (newPresence.userID === "820549182984814645") {
+    if (status && status.stable === newPresence.status) return;
+  } else {
+    if (status && status.dev === newPresence.status) return;
+  }
   const LogChannel = client.channels.cache.get("865068007599767557");
   if (newPresence.status === "offline") {
+    if (newPresence.user.id === "841539874577317888") {
+      status.dev = "offline";
+    } else {
+      status.stable = "offline";
+    }
     LogChannel.send("<@!744752301033521233>!起きて！", {embed: {
       title: "ダウン情報",
       description: `<@!${newPresence.user.id}>がダウンしています。`,
       color: 0xff0000
     }});
   } else if (newPresence.status !== "offline") {
+    if (newPresence.user.id === "841539874577317888") {
+      status.dev = "online";
+    } else {
+      status.stable = "online";
+    }
     LogChannel.send({embed: {
       title: "アップ情報",
       description: `<@!${newPresence.user.id}>がオンラインに復帰しました。`,
